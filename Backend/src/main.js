@@ -14,8 +14,9 @@ import authRouter from "./routes/auth.router.js";
 import userRouter from "./routes/user.router.js";
 import workspaceRouter from "./routes/workspace.router.js";
 import cors from 'cors'
+import ENVIRONMENT from './config/environment.config.js'
 
-const PORT = 8080
+const PORT = ENVIRONMENT.PORT
 
 // se crea una app de express (server HTTP)
 const app = express()
