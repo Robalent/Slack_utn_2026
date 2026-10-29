@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import login from "../../services/authService.js";
 import useForm from "../../hooks/useForm.jsx";
+import useRequest from "../../hooks/useRequest.jsx";
 
 
 function LoginScreen (){
@@ -8,23 +9,16 @@ function LoginScreen (){
     const {formState, handleChangeInput} = useForm(initial_state)
     // cuando consultemos tendremos este estado que estara guardando
     // como se hace esa consulta (en qué estado está)
-    const [api_response, setApiResponse] = useState({response:null, error: null, loading:false})
+    const {loading, response, error, sendRequest} = useRequest()
 
     async function handleSubmit(event){
         event.preventDefault()
+        sendRequest(
+            () => login(formState.email, formState.password)
+        )
         console.log('Usuario intenta iniciar sesión', formState)
-        try {
-            // siempre que queramos llamar a una api debemos tener estos 3 estados (loading, error, response)
-            setApiResponse({loading: true, error: null, response:null})
-            const response = await login(formState.email, formState.password)
-            setApiResponse({loading: false, error: null, response: response})
-        } catch (error) {
-            // si hubo fallo guardamos en el estado guardamos el mensaje del fallo
-            setApiResponse({loading:false, error:error.message, response:null})
-        }
        
     }
-    console.log('[Estado de la consulta de login]:',api_response)
 
     return(
         <div>

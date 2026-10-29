@@ -29,6 +29,19 @@ app.use(cors())
 // y transformara el JSON recibido y lo guardara en request.body 
 app.use(express.json())
 
+app.use(async (req, res, next) => {
+    try {
+        await connectMongoDB();
+        next();
+    } catch (error) {
+        console.error("Error conectando MongoDB:", error);
+        res.status(503).json({
+            message: "No se pudo conectar a la base de datos"
+        });
+    }
+});
+
+
 // si me haccen un GET a la dirección /api/status activar tal funcion
 app.get(
     '/api/status',
@@ -38,7 +51,6 @@ app.get(
     }
 )
 
-
 // Devolver un listado de usuarios
 // GET /api/users
 // Devolver un JSON/HTML con el listadito de usuarios
@@ -47,7 +59,6 @@ app.get(
 // GET /api/users/:user_id
 // user_id es un parametro de URL, básicamente es un valor que va a variar y nosotros podemos acceder a el 
 // Un GET a /api/users/1 o /api/users/2 
-
 
 
 app.use('/api/auth', authRouter)
