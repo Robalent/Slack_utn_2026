@@ -1,9 +1,11 @@
 /*Interacción con la API */
 
-async function login(email, password) {
+const API_URL = 'http://localhost:8080'
+
+export async function login(email, password) {
 
     const response_http = await fetch(
-        'https://localhost:8080/api/auth/login',
+        API_URL + '/api/auth/login',
         {
             method: 'POST',
             headers: {
@@ -24,9 +26,27 @@ async function login(email, password) {
         throw new Error(response_body.message)
     }
     return response_body
-
-
-
 }
 
-export default login
+export async function register(username, email, password) {
+    const response_http = await fetch(
+        API_URL + '/api/auth/register',
+        {
+            method: 'POST',
+            headers:{
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            })
+        }
+    )
+    const response_body = await response_http.json()
+
+    if (!response_body.ok) {
+        throw new Error(response_body.message)
+    }
+    return response_body
+}

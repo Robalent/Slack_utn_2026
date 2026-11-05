@@ -10,6 +10,7 @@ function useRequest (){
             setLoading(true)
             const response = await requestFn()
             setResponse(response)
+            setError(null)
         } catch (error) {
             setResponse(null)
             setError(error.message)

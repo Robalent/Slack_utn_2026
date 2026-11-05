@@ -51,10 +51,6 @@ app.get(
     }
 )
 
-// Devolver un listado de usuarios
-// GET /api/users
-// Devolver un JSON/HTML con el listadito de usuarios
-
 // Trae la info de un cierto usuario por ID 
 // GET /api/users/:user_id
 // user_id es un parametro de URL, básicamente es un valor que va a variar y nosotros podemos acceder a el 
@@ -63,7 +59,7 @@ app.get(
 
 app.use('/api/auth', authRouter)
 app.use('/api/users', userRouter)
-app.use('/api/workspace', workspaceRouter)
+app.use('/api/workspaces', workspaceRouter)
 
 app.use(
     errorHandlerMiddleware
