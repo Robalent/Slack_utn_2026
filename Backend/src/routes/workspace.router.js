@@ -61,7 +61,7 @@ workspaceRouter.delete(
     workspaceMiddleware(['owner']),
     async (request, response) =>{
         await workspace_repository.deleteById(request.workspace._id)
-        await member_repository.deleteAllMembershipsByWorkspaceId(request.workspace_id)
+        await member_repository.deleteAllMembershipsByWorkspaceId(request.workspace._id)
         return response.status(200).send({
             ok: true, 
             message: 'Workspace eliminado correctamente',
@@ -86,8 +86,7 @@ workspaceRouter.get(
             status: 200,
             data: workspaces
         })
-    }
-    
+    }   
 )
 
 workspaceRouter.put(

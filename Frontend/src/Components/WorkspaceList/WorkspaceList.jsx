@@ -1,24 +1,10 @@
 import { Link } from "react-router"
 import useRequest from "../../hooks/useRequest"
 import { getAllWorkspaces } from "../../services/workspaceService"
+import useWorkspaceList from "../../hooks/useWorkspaceList"
 
 export default function WorkspaceList (){
-    const {workspaces_response, workspaces_error, workspaces_loading, reloadWorkspaces} = useWorkspacesList()
-
-useEffect(
-        () => {
-            sendRequest(
-                () => getAllWorkspaces()
-            )
-        },
-        []
-    )
-
-    function reloadWorkspaces(){
-        sendRequest(
-            () => getAllWorkspaces()
-        )
-    }
+    const {workspaces_response, workspaces_error, workspaces_loading, reloadWorkspaces} = useWorkspaceList()
 
     if (workspaces_loading) {
         return<span>Cargando...</span>
@@ -42,8 +28,8 @@ useEffect(
     else{
         return <div>
             {workspaces_response.data.map((workspace) => (
-                <Link key={workspace.id} to={`/workspace/${workspace._id}`}> 
-                {workspace.nombre}
+                <Link key={workspace.member_id} to={`/workspace/${workspace.workspace_id}`}> 
+                {workspace.workspace_nombre}
                 </Link>
             ))}
         </div>
