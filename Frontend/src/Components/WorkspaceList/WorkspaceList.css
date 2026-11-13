@@ -1,0 +1,180 @@
+/* ============================================
+   WORKSPACELIST.CSS — Card de espacios de trabajo
+   (lista estilo Slack dentro de la pantalla principal)
+   ============================================ */
+
+.workspace-card {
+  width: 100%;
+  max-width: 640px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 20px 24px;
+}
+
+.workspace-card__title {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.workspace-card__status {
+  margin: 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.workspace-card__reload {
+  font-size: var(--font-size-small);
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary-light);
+  color: var(--color-text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.workspace-card__reload:hover {
+  filter: brightness(0.95);
+}
+
+.workspace-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.workspace-card__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 10px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.workspace-card__item:hover {
+  background-color: var(--color-bg);
+}
+
+.workspace-card__item + .workspace-card__item {
+  border-top: 1px solid var(--color-border);
+}
+
+.workspace-card__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.workspace-card__item:hover .workspace-card__avatar {
+  border-radius: 50%;
+}
+
+.workspace-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.workspace-card__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.workspace-card__item:hover .workspace-card__name {
+  color: var(--color-primary-dark);
+}
+
+.workspace-card__meta {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.workspace-card__members {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.workspace-card__member {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+/* color del borde según el rol (paleta Slack) */
+.workspace-card__member--owner {
+  border-color: rgba(224, 30, 90, 0.45);
+}
+
+.workspace-card__member--admin {
+  border-color: rgba(18, 100, 163, 0.45);
+}
+
+.workspace-card__member-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace-card__member-role {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--color-text-muted);
+}
+
+.workspace-card__member--owner .workspace-card__member-role {
+  color: #e01e5a;
+}
+
+.workspace-card__member--admin .workspace-card__member-role {
+  color: #1264a3;
+}
+
+/* --- Botón para crear un nuevo workspace (debajo de la lista) --- */
+.workspace-card__create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 18px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background-color var(--transition-fast);
+}
+
+.workspace-card__create:hover {
+  background-color: var(--color-primary-dark);
+}

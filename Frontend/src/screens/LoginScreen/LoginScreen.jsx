@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router'
 import {login} from "../../services/authService.js";
 import useForm from "../../hooks/useForm.jsx";
 import useRequest from "../../hooks/useRequest.jsx";
 import {useNavigate} from 'react-router'
+import { Form, FormField, Button } from '../../Components/Form/Form'
+import Message from '../../Components/Message/Message'
+import './LoginScreen.css'
 
 function LoginScreen (){
     const initial_state = {email: '', password: ''}
@@ -38,30 +42,61 @@ function LoginScreen (){
     )
 
     return(
-        <div>
-            <h1>Iniciar Sesión</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" name="email" id="email" value={formState.email} onChange={handleChangeInput}/>
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" name="password" id="password" value={formState.password} onChange={handleChangeInput}/>
-                </div>
-                {
-                    error && !loading && <span style={{color:'red'}}>ERROR: {error}</span>
-                }
-                {
-                    loading
-                    ? <button type="submit" disabled={true}>Cargando...</button>
-                    : <button type="submit">Iniciar Sesión</button>
-                }
-                {
-                    response && !loading && <span style={{color: 'greenyellow'}}>Inicio de sesion exitoso</span>
-                }
-                
-            </form>
+        <div className="login">
+            <div className="login__card">
+                <h1 className="login__title">Iniciar sesión</h1>
+                <p className="login__subtitle">Ingresá con tu cuenta para continuar</p>
+                <Form onSubmit={handleSubmit}>
+                    <FormField
+                        label="Email:"
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={formState.email}
+                        onChange={handleChangeInput}
+                    />
+                    <FormField
+                        label="Contraseña:"
+                        type="password"
+                        name="password"
+                        id="password"
+                        value={formState.password}
+                        onChange={handleChangeInput}
+                    />
+                    {
+                        error && !loading &&
+                        <Message type="error">
+                            ERROR: {error}
+                        </Message>
+                    }
+                    <Button type="submit" loading={loading}>
+                        Iniciar sesión
+                    </Button>
+                    {
+                        response && !loading &&
+                        <Message type="success">
+                            Inicio de sesión exitoso
+                        </Message>
+                    }
+                </Form>
+                <p className="login__register">
+                    ¿No tenés una cuenta?
+                    <Link className="login__register-link" to="/register">
+                        Registrate
+                    </Link>
+                </p>
+                <p className="login__register">
+                    ¿No llegó el email de verificación?
+                    <Link className="login__register-link" to="/resend-email-verification">
+                        Reenviar
+                    </Link>
+                </p>
+                <p className="login__register">
+                    <Link className="login__register-link" to="/forgot-password">
+                        Olvidé mi contraseña
+                    </Link>
+                </p>
+            </div>
         </div>
     )
 }

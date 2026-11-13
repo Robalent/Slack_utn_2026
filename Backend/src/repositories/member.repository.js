@@ -23,23 +23,24 @@ class MemberRepository {
     async getAllWorkspaceByUserId(user_id){
         const result = await Member
         .find({fk_id_usuario: user_id})
-        .select('role fecha_creacion fk_id_espacio_trabajo')
+        .select('rol fecha_creacion fk_id_espacio_trabajo')
         .populate(
             'fk_id_espacio_trabajo',
             'nombre fecha_creacion'
         )
+        return result
         /*Populate permite expandir referencias, SOLO ES VALIDO EN PROPIEDADES CON ref en el modelo */
-        return result.map(
-            membership => {
-                return {
-                    member_id: membership._id,
-                    member_rol: membership.rol,
-                    workspace_id: membership.fk_id_espacio_trabajo._id,
-                    workspace_nombre: membership.fk_id_espacio_trabajo.nombre,
-                    workspace_fecha_creacion: membership.fk_id_espacio_trabajo.workspace_fecha_creacion
-                }
-            }
-        )
+        // return result.map(
+        //     membership => {
+        //         return {
+        //             member_id: membership._id,
+        //             member_rol: membership.rol,
+        //             workspace_id: membership.fk_id_espacio_trabajo._id,
+        //             workspace_nombre: membership.fk_id_espacio_trabajo.nombre,
+        //             workspace_fecha_creacion: membership.fk_id_espacio_trabajo.fecha_creacion
+        //         }
+        //     }
+        // )
     }
 
     // Traer todos los miembros de un espacio de trabajo
@@ -47,8 +48,19 @@ class MemberRepository {
         const result = await Member
         .find({fk_id_espacio_trabajo: workspace_id})
         .populate(
-            'fk_id_usuario', 
+            'fk_id_usuario',
             'nombre email',
+        )
+        return result
+    }
+
+    // Traer los miembros de varios espacios de trabajo en una sola consulta
+    async getAllMembershipsByWorkspaceIds(workspace_ids){
+        const result = await Member
+        .find({fk_id_espacio_trabajo: { $in: workspace_ids }})
+        .populate(
+            'fk_id_usuario',
+            'nombre',
         )
         return result
     }

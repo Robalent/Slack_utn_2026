@@ -1,21 +1,20 @@
-import React, { useEffect } from "react";
-import useRequest from "../../hooks/useRequest";
-import { getAllWorkspaces } from "../../services/workspaceService";
+import React from "react";
 import WorkspaceList from "../../Components/WorkspaceList/WorkspaceList";
+import './HomeScreen.css'
 
 function HomeScreen () {
-   
     return (
-        <div>
-            <h1>Bienvenido A slack!</h1>
-            <div>
-                <h2>Mis espacios de trabajo:</h2>
+        <div className="home">
+            <main className="home__content">
+                <h1 className="home__title">Bienvenido a Slack!</h1>
+                <p className="home__subtitle">
+                    Acá vas a encontrar tus espacios de trabajo, con sus
+                    miembros y sus roles. Hacé clic en uno para entrar.
+                </p>
                 <WorkspaceList/>
-            </div>
+            </main>
         </div>
     )
-
-    
 }
 
 export default HomeScreen

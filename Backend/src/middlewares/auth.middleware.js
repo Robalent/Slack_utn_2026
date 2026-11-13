@@ -35,7 +35,7 @@ function authMiddleware(request, response, next) {
     } catch (error) {
         // si hubo un fallo al verificar el token
         if(
-            error instanceof jwt.JsonWebtokenError // falla verificación o está mal escrito
+            error instanceof jwt.JsonWebTokenError // falla verificación o está mal escrito
             ||
             error instanceof jwt.NotBeforeError // Es un token del futuro 
             ||

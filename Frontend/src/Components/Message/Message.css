@@ -1,0 +1,37 @@
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  line-height: 1.4;
+  border: 1px solid transparent;
+  text-align: left;
+}
+
+.message__icon {
+  font-weight: 700;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.message--error {
+  background-color: var(--color-error-bg);
+  color: var(--color-error-text);
+  border-color: var(--color-error-border);
+}
+
+.message--error .message__icon::before {
+  content: '\26A0';
+}
+
+.message--success {
+  background-color: var(--color-success-bg);
+  color: var(--color-success-text);
+  border-color: var(--color-success-border);
+}
+
+.message--success .message__icon::before {
+  content: '\2713';
+}

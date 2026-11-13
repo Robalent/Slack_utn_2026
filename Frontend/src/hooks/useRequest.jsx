@@ -11,6 +11,7 @@ function useRequest (){
             const response = await requestFn()
             setResponse(response)
             setError(null)
+            return response
         } catch (error) {
             setResponse(null)
             setError(error.message)

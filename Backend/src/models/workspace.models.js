@@ -10,7 +10,7 @@ const workspaceSchema = new mongoose.Schema (
         },
         descripcion:{
             type:String,
-            maxlength: 500
+            maxlength: 1000
         },
         fecha_creacion:{
             type: Date,
