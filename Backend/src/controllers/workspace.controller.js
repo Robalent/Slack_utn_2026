@@ -11,7 +11,7 @@ import * as workspace_service from '../services/workspace.services.js'
 
 
 export async function createWorkspace(request, response) {
-    console.log('[CREATE WORKSPACE]', request.user)
+    //console.log('[CREATE WORKSPACE]', request.user)
 
     const { name, description } = request.body
 
@@ -25,7 +25,7 @@ export async function createWorkspace(request, response) {
         {
             ok: true,
             status: 201,
-            message: 'Por ahora todo bien',
+            message: 'Workspace creado correctamente',
             data: {
                 workspace_created,
                 owner_membership

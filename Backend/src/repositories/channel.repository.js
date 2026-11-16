@@ -25,6 +25,12 @@ class ChannelRepository {
         // .populate('fk_id_espacio_trabajo') //CHEQUEAR POPULATE
         return result
     }
+
+    async getById(channel_id){
+        const result = await Channel.findById(channel_id)
+        return result
+    }
+    
 }
 
 const channel_repository = new ChannelRepository()
