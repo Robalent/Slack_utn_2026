@@ -10,6 +10,8 @@ import { Route, Routes } from "react-router";
 import AuthMiddleware from "./Middlewares/AuthMiddleware";
 import WorkspaceScreen from "./screens/WorkspaceScreen/WorkspaceScreen";
 import NewWorkspaceScreen from "./screens/NewWorkspaceScreen/NewWorkspaceScreen";
+import ChannelScreen from "./screens/ChannelScreen/ChannelScreen";
+import NewChannelScreen from "./screens/NewChannelScreen/NewChannel";
 
 
 const App = () => {
@@ -20,7 +22,10 @@ const App = () => {
 
         <Route path='/home'element={<HomeScreen/>}/>
 
-        <Route path="/workspace/:workspace_id" element={<WorkspaceScreen/>}/>
+        <Route path="/workspace/:workspace_id" element={<WorkspaceScreen/>}>
+          <Route path=":channel_id" element={<ChannelScreen/>}/>
+          <Route path="newChannel" element={<NewChannelScreen/>}/>
+        </Route>
 
         <Route path="/workspaces/new" element={<NewWorkspaceScreen/>}/>
       </Route>   

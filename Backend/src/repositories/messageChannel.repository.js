@@ -20,7 +20,7 @@ class MessageChannelRepository {
     }
 
     async getAllMessagesByChannelId (channel_id){
-        const result = await MessageChannel.findById(channel_id)
+        const result = await MessageChannel.find({fk_id_canal: channel_id})
         return result
     }
 

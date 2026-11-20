@@ -17,6 +17,7 @@ import cors from 'cors'
 import ENVIRONMENT from './config/environment.config.js'
 import channelRouter from "./routes/channels.routers.js";
 import memberRouter from "./routes/member.router.js";
+import messagesRouter from "./routes/messageChannel.router.js";
 
 const PORT = ENVIRONMENT.PORT
 
@@ -64,6 +65,7 @@ app.use('/api/users', userRouter)
 app.use('/api/workspaces', workspaceRouter)
 app.use('/api/workspaces/:workspace_id/channels', channelRouter)
 app.use('/api/workspaces/:workspace_id/members', memberRouter)
+app.use('/api/workspaces/:workspace_id/channels/:channel_id/messages', messagesRouter)
 
 app.use(
     errorHandlerMiddleware

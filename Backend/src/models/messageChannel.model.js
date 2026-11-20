@@ -1,6 +1,6 @@
 import mongoose, { mongo } from "mongoose";
-import { USER_COLECTION_NAME } from "./user.model";
-import { CHANNEL_COLLECTION_NAME } from "./channel.model";
+import { USER_COLECTION_NAME } from "./user.model.js";
+import { CHANNEL_COLLECTION_NAME } from "./channel.model.js";
 
 const messageChannelSchema = new mongoose.Schema(
     {
