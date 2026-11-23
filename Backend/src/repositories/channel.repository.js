@@ -30,6 +30,11 @@ class ChannelRepository {
         const result = await Channel.findById(channel_id)
         return result
     }
+
+    async deleteAllChannelsByWorkspaceId(workspace_id){
+        const result = await Channel.deleteMany({fk_id_espacio_trabajo: workspace_id})
+        return result
+    }
     
 }
 

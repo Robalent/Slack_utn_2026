@@ -14,10 +14,17 @@ function useWorkspace(workspace_id){
         [workspace_id]
     )
 
+    function reloadWorkspace() {
+        sendRequest(
+            () => getWorkspaceById(workspace_id)
+        )
+    }
+
     return{
         workspace_response: response, 
         workspace_error: error,
-        workspace_loading: loading
+        workspace_loading: loading,
+        reloadWorkspace
     }
 }
 

@@ -24,7 +24,7 @@ class WorkspaceRepository {
     }
 
     async updateById(workspace_id, update_data){
-        const result = await Workspace.findByIdAndUpdate(workspace_id, update_data)
+        const result = await Workspace.findByIdAndUpdate(workspace_id, update_data, { returnDocument: 'after', runValidators: true })
         return result
     }
 }

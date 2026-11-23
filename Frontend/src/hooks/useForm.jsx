@@ -14,9 +14,14 @@ function useForm (initial_state){
             }
         )
     }
+
+    function setFormValues(values) {
+        setFormState(values)
+    }
     return {
         formState, 
-        handleChangeInput
+        handleChangeInput, 
+        setFormValues
     }
 }
 

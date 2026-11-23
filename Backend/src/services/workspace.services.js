@@ -8,6 +8,8 @@ y arman la respuesta HTTP.
 import workspace_repository from '../repositories/workspace.repository.js'
 import member_repository from '../repositories/member.repository.js'
 import ServerError from '../utils/error.util.js'
+import channel_repository from '../repositories/channel.repository.js'
+import messagechannel_repository from '../repositories/messageChannel.repository.js'
 
 
 /*
@@ -75,8 +77,15 @@ El workspace ya viene validado por el workspaceMiddleware (existe y
 el usuario tiene rol owner) y llega en request.workspace.
 */
 export async function deleteWorkspace({ workspace }) {
-    await workspace_repository.deleteById(workspace._id)
+    const channels = await channel_repository.getAllChannelsByWorkspaceId(workspace._id)
+     
+    for (const channel of channels) {
+        await messagechannel_repository.deleteAllMessagesByChannelId(channel._id)
+    }
+    await channel_repository.deleteAllChannelsByWorkspaceId(workspace._id)
     await member_repository.deleteAllMembershipsByWorkspaceId(workspace._id)
+    await workspace_repository.deleteById(workspace._id)
+    
 
     return workspace
 }

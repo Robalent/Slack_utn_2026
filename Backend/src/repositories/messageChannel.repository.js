@@ -24,16 +24,6 @@ class MessageChannelRepository {
         return result
     }
 
-    async gelAllMessagesBySearchTerm(search_term){
-        const result = await MessageChannel.find({
-            nombre :{
-                $regex: search_term,
-                $options: 'i'
-            }
-        }) // REVISAR ESTE MÉTODO 
-        return result
-    }
-
     async getAllMessagesByDateRange(min_date, max_date){
         const result = await MessageChannel.find({
             fecha_creacion:{
@@ -48,6 +38,11 @@ class MessageChannelRepository {
         const result = await MessageChannel.find({
             fk_id_emisor: member_id
         })
+        return result
+    }
+
+    async deleteAllMessagesByChannelId(channel_id){
+        const result = await MessageChannel.deleteMany({fk_id_canal: channel_id})
         return result
     }
 } 

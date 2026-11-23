@@ -12,6 +12,7 @@ import WorkspaceScreen from "./screens/WorkspaceScreen/WorkspaceScreen";
 import NewWorkspaceScreen from "./screens/NewWorkspaceScreen/NewWorkspaceScreen";
 import ChannelScreen from "./screens/ChannelScreen/ChannelScreen";
 import NewChannelScreen from "./screens/NewChannelScreen/NewChannel";
+import EditWorkspaceScreen from "./screens/EditWorkspaceScreen/EditWorkspaceScreen"
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/workspace/:workspace_id" element={<WorkspaceScreen/>}>
           <Route path=":channel_id" element={<ChannelScreen/>}/>
           <Route path="newChannel" element={<NewChannelScreen/>}/>
+          <Route path="edit" element={<EditWorkspaceScreen/>}/>
         </Route>
 
         <Route path="/workspaces/new" element={<NewWorkspaceScreen/>}/>
