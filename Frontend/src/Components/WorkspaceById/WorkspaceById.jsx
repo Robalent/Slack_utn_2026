@@ -3,6 +3,7 @@ import { WorkspaceContext } from "../../Context/WorkspaceContext"
 import { useContext } from "react"
 import useRequest from "../../hooks/useRequest"
 import { deleteWorkspace } from "../../services/workspaceService.js"
+import "./WorkspaceById.css"
 
 export default function WorkspaceById() {
     const { workspace_id } = useParams()
@@ -24,17 +25,17 @@ export default function WorkspaceById() {
     }
 
     if (workspace_loading) {
-        return <span>Cargando...</span>
+        return <span className="workspace-info workspace-info--status">Cargando...</span>
     }
     else if (workspace_error) {
-        return <span>ERROR: {workspace_error}</span>
+        return <span className="workspace-info workspace-info--status">ERROR: {workspace_error}</span>
     }
     else if (!workspace_response) {
-        return <span>No se pudo obtener el workspace</span>
+        return <span className="workspace-info workspace-info--status">No se pudo obtener el workspace</span>
     }
     return (
-        <div>
-            <h2>{workspace_response.data.workspace_selected.nombre}</h2>
+        <div className="workspace-info">
+            <h2 className="workspace-info__name">{workspace_response.data.workspace_selected.nombre}</h2>
 
             <Link to={`/workspace/${workspace_id}/edit`}>Editar Workspace</Link>
             <button onClick={handleDelete}>Eliminar Workspace</button>

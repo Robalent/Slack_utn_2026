@@ -1,0 +1,108 @@
+/* ============================================
+   CHANNELSLIST.CSS — Listado de canales
+   ============================================ */
+
+.channels-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.channels-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.channels-list h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.channels-list__create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--color-primary-dark-strong);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.channels-list__create:hover {
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+}
+
+.channels-list__link {
+  display: block;
+  padding: 7px 9px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  color: var(--color-text);
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.channels-list__link + .channels-list__link {
+  margin-top: 2px;
+}
+
+.channels-list__link:hover {
+  color: var(--color-primary-dark-strong);
+  background-color: var(--color-primary-light);
+}
+
+.channels-list p {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+/* --- Estados de carga y error --- */
+.channels-list--status {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+.channels-list--error {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-size: var(--font-size-small);
+  color: var(--color-error-text);
+}
+
+.channels-list--error span {
+  overflow-wrap: anywhere;
+}
+
+.channels-list--error button {
+  align-self: flex-start;
+  padding: 5px 10px;
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { ChannelContext } from "../../Context/ChannelContext";
 import { createMessages } from "../../services/messageService.js";
 import { useParams } from "react-router";
+import "./MessageInput.css"
 
 export default function MessageInput() {
     const [content, setContent] = useState("")
@@ -30,10 +31,10 @@ export default function MessageInput() {
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="message-input">
+            <form className="message-input__form" onSubmit={handleSubmit}>
                 <textarea type="text" placeholder="Escribí tu mensaje..." value={content} onChange={function (event) { setContent(event.target.value), setError("") }} />
-                {error && <p>{error}</p>}
+                {error && <p className="message-input__error">{error}</p>}
 
                 <button>Enviar</button>
             </form>

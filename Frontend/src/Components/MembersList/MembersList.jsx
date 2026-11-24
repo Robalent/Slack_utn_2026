@@ -4,6 +4,7 @@ import useForm from "../../hooks/useForm";
 import { useParams } from "react-router";
 import { createWorkspaceMember } from "../../services/workspaceService";
 import useRequest from "../../hooks/useRequest";
+import "./MembersList.css"
 
 export default function MembersList() {
     const { members_response, members_loading, members_error, reloadMembers, workspace_response } = useContext(WorkspaceContext)
@@ -27,32 +28,34 @@ export default function MembersList() {
     }
 
     if (members_loading) {
-        return <span>Cargando...</span>
+        return <span className="members-list members-list--status">Cargando...</span>
     }
     else if (members_error) {
-        return <div>
+        return <div className="members-list members-list--error">
             <span>ERROR: {members_error}</span>
             <button onClick={reloadMembers}>Recargar</button>
         </div>
     }
     else if (!members_response) {
-        return <div>
+        return <div className="members-list members-list--error">
             <span>Error: Ocurrió un problema al obtener la lista de Members</span>
             <button onClick={reloadMembers}>Recargar</button>
         </div>
 
     } else {
-        return <div>
-            <h3>Miembros</h3>
-            {(user_role === 'admin' || user_role === 'owner') && (
-                <button onClick={function () {
-                    setShowForm(!show_form)
-                }}>+</button>
-            )}
+        return <div className="members-list">
+            <div className="members-list__header">
+                <h3>Miembros</h3>
+                {(user_role === 'admin' || user_role === 'owner') && (
+                    <button className="members-list__create" onClick={function () {
+                        setShowForm(!show_form)
+                    }}>+</button>
+                )}
+            </div>
 
             {members_response.data.length > 0
                 ? members_response.data.map((member) => (
-                    <div key={member._id}>
+                    <div className="members-list__item" key={member._id}>
                         {member.fk_id_usuario.nombre}
                     </div>
                 ))

@@ -1,0 +1,196 @@
+/* ============================================
+   MEMBERSLIST.CSS — Listado de miembros y modal
+   ============================================ */
+
+.members-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.members-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.members-list h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.members-list__create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.members-list__create:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.members-list__item {
+  padding: 7px 9px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-small);
+  overflow-wrap: anywhere;
+}
+
+.members-list__item + .members-list__item {
+  margin-top: 2px;
+}
+
+.members-list p {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+/* --- Estados de carga y error --- */
+.members-list--status {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+.members-list--error {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-size: var(--font-size-small);
+  color: var(--color-error-text);
+}
+
+.members-list--error span {
+  overflow-wrap: anywhere;
+}
+
+.members-list--error button {
+  align-self: flex-start;
+  padding: 5px 10px;
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+/* --- Modal para agregar miembros --- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  /* Sin fondo oscuro: el workspace sigue visible detrás */
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 420px;
+  max-height: 90dvh;
+  padding: var(--space-lg);
+  overflow-y: auto;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.modal-content h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.modal-content label {
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.modal-content button {
+  padding: 10px 14px;
+  font-weight: 700;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.modal-content form > button {
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+}
+
+.modal-content form > button:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.modal-content form > button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.modal-content > button {
+  align-self: flex-start;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.modal-content p {
+  margin: 0;
+  font-size: var(--font-size-small);
+  color: var(--color-error-text);
+}

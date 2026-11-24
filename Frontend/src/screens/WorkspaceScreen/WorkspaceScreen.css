@@ -1,0 +1,283 @@
+/* ============================================
+   WORKSCREEN.CSS — Distribución general del workspace
+   Solo estilos estructurales: grid, cabecera, drawer y área principal.
+   Los estilos particulares viven en el CSS de cada componente.
+   ============================================ */
+
+.workspace {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  background-color: var(--color-bg);
+}
+
+/* Checkbox oculto, pero enfocable con teclado */
+.workspace__menu-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Cabecera --- */
+.workspace__header {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 0;
+  min-height: 60px;
+  padding: 10px clamp(12px, 2vw, 24px);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.workspace__header > :last-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.workspace__menu-button {
+  display: none;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--color-text);
+  background-color: var(--color-primary-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.workspace__menu-button:hover {
+  color: var(--color-surface);
+  background-color: var(--color-primary);
+}
+
+.workspace__menu-toggle:focus-visible ~ .workspace__header .workspace__menu-button {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.workspace__menu-button span {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* El fondo solo existe visualmente en mobile */
+.workspace__backdrop {
+  display: none;
+}
+
+/* --- Cuerpo: sidebar + contenido --- */
+.workspace__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+}
+
+.workspace__sidebar {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.6vh, 18px);
+  padding: clamp(12px, 2vw, 20px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  overflow-wrap: anywhere;
+  background-color: var(--color-primary-light);
+  border-right: 1px solid var(--color-border);
+}
+
+.workspace__sidebar > * {
+  flex: 0 0 auto;
+  min-width: 0;
+  padding: clamp(10px, 1.6vw, 14px);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.workspace__main {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(12px, 2vw, 24px);
+  overflow: auto;
+  overflow-wrap: anywhere;
+  background-color: var(--color-surface);
+}
+
+.workspace__main > * {
+  width: 100%;
+  max-width: 960px;
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.workspace__main > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.workspace__main h1,
+.workspace__main h2 {
+  margin-top: 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.3;
+}
+
+/* --- Desktop / tablet --- */
+@media (min-width: 721px) {
+  .workspace {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .workspace__menu-toggle {
+    display: none;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1023px) {
+  .workspace__body {
+    grid-template-columns: minmax(200px, 220px) minmax(0, 1fr);
+  }
+
+  .workspace__main {
+    padding: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .workspace__body {
+    grid-template-columns: clamp(240px, 20vw, 300px) minmax(0, 1fr);
+  }
+}
+
+/* --- Mobile: hamburguesa + drawer --- */
+@media (max-width: 720px) {
+  .workspace {
+    height: auto;
+    overflow: visible;
+  }
+
+  .workspace__header {
+    min-height: 56px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .workspace__header > :last-child {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    overflow: hidden;
+  }
+
+  .workspace__menu-button {
+    display: inline-flex;
+  }
+
+  .workspace__body {
+    min-height: calc(100dvh - 56px);
+  }
+
+  .workspace__main {
+    min-height: calc(100dvh - 56px);
+    padding: 16px 14px 24px;
+    overflow: visible;
+  }
+
+  .workspace__backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    padding: 0;
+    border: 0;
+    background-color: rgba(29, 28, 29, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    cursor: pointer;
+    transition: opacity var(--transition-med),
+      visibility var(--transition-med);
+  }
+
+  .workspace__menu-toggle:checked ~ .workspace__backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .workspace__sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 25;
+    width: min(86vw, 320px);
+    max-width: 100%;
+    padding-block-start: 76px;
+    transform: translateX(-105%);
+    transition: transform var(--transition-med);
+    box-shadow: var(--shadow-card);
+  }
+
+  .workspace__menu-toggle:checked ~ .workspace__body .workspace__sidebar {
+    transform: translateX(0);
+  }
+}
+
+/* Pantallas muy angostas (desde 280px) */
+@media (max-width: 420px) {
+  .workspace__header {
+    padding-inline: 10px;
+  }
+
+  .workspace__menu-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .workspace__main {
+    padding: 14px 12px 20px;
+  }
+
+  .workspace__sidebar {
+    padding-block-start: 104px;
+  }
+
+  .workspace__sidebar > * {
+    padding: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workspace__sidebar,
+  .workspace__backdrop {
+    transition: none;
+  }
+}

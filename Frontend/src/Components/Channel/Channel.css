@@ -1,0 +1,39 @@
+/* ============================================
+   CHANNEL.CSS — Contenedor de la conversación
+   ============================================ */
+
+.channel {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-height: 0;
+}
+
+.channel > h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.channel > .messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding-right: 4px;
+}
+
+.channel > .message-input {
+  flex: 0 0 auto;
+}
+
+.channel--status {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,127 @@
+/* ============================================
+   NEWCHANNEL.CSS — Modal para crear un canal
+   ============================================ */
+
+.new-channel-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  overflow-y: auto;
+  /* Sin fondo oscuro: el workspace sigue visible detrás */
+}
+
+.new-channel-modal__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90dvh;
+  padding: var(--space-lg);
+  overflow-y: auto;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.new-channel-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  font-size: 22px;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--color-text-muted);
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.new-channel-modal__close:hover {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+.new-channel-modal__close:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.new-channel-modal__title {
+  margin: 0 32px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.4vw, 22px);
+  line-height: 1.3;
+}
+
+.new-channel-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.new-channel-modal__form label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.new-channel-modal__form input,
+.new-channel-modal__form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: var(--font-size-base);
+  line-height: 1.4;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.new-channel-modal__form input::placeholder,
+.new-channel-modal__form textarea::placeholder {
+  color: rgba(97, 96, 97, 0.65);
+}
+
+.new-channel-modal__form input:hover,
+.new-channel-modal__form textarea:hover {
+  border-color: var(--color-border-strong);
+}
+
+.new-channel-modal__form input:focus,
+.new-channel-modal__form textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.new-channel-modal__form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+@media (max-width: 420px) {
+  .new-channel-modal {
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .new-channel-modal__content {
+    max-height: calc(100dvh - 20px);
+    padding: 18px 16px;
+  }
+}
