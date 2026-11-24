@@ -177,7 +177,8 @@ export async function loginUser({ email, password }) {
             name: user.nombre,
             email: user.email
         },
-        ENVIRONMENT.JWT_SECRET_KEY // firmamos con esto
+        ENVIRONMENT.JWT_SECRET_KEY, // firmamos con esto
+        {expiresIn: '1h'}
     )
 
     return { auth_token }

@@ -106,3 +106,26 @@ export async function deleteWorkspace(workspace_id){
     }
     return response_body
 }
+
+export async function createWorkspaceMember(workspace_id, email, rol) {
+    const auth_token = localStorage.getItem('auth_token')
+    const response_http = await fetch(
+        API_URL + '/api/workspaces/' + workspace_id + '/members',
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `bearer ${auth_token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, rol })
+        }
+
+    )
+    //Leemos el cuerpo de la respuesta como un JSON
+    const response_body = await response_http.json()
+
+    if (!response_body.ok) {
+        throw new Error(response_body.message)
+    }
+    return response_body
+}

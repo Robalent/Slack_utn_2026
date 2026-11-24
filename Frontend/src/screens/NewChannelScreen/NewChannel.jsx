@@ -6,13 +6,14 @@ import { WorkspaceContext } from "../../Context/WorkspaceContext"
 import { createChannel } from "../../services/channelService"
 import Message from "../../Components/Message/Message"
 import { Button } from "../../Components/Form/Form"
+import { useNavigate } from "react-router"
 
 function NewChannelScreen() {
     const initial_state = { name: '', description: '' }
     const { workspace_id } = useParams()
     const { formState, handleChangeInput } = useForm(initial_state)
     const { response, error, loading, sendRequest } = useRequest()
-    const { reloadChannels } = useContext(WorkspaceContext)
+    const navigate = useNavigate() 
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -21,7 +22,7 @@ function NewChannelScreen() {
         )
 
         if (response && response.ok) {
-            reloadChannels()
+            navigate(`/workspace/${workspace_id}/${response.data.channel_created._id}`)
         }
     }
 

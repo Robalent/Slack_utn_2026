@@ -24,7 +24,8 @@ export default function ChannelsList(){
     }
     else {
         return <div>
-            <Link to={`/workspace/${workspace_id}/newChannel`}>+ Crear un nuevo canal</Link>
+            <h3>Canales</h3>
+            <Link to={`/workspace/${workspace_id}/newChannel`}>+</Link>
             
             {channels_response.data.length ===0
             ?( <p>Aún no creaste ningún canal</p>)

@@ -22,6 +22,7 @@ function workspaceMiddleware(valid_roles) {
             throw new ServerError('No tenes permisos suficientes para hcer esta operación', 403)
         }
         request.workspace = workspace_selected
+        request.membership = membership
         next()
     }
 }

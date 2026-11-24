@@ -5,6 +5,7 @@ import { resetPassword } from '../../services/authService'
 import { Form, FormField, Button } from '../../Components/Form/Form'
 import Message from '../../Components/Message/Message'
 import './ResetPasswordScreen.css'
+import useForm from '../../hooks/useForm'
 
 function ResetPasswordScreen() {
     // El backend manda el link con el token por querystring:

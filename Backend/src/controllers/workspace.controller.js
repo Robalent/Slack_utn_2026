@@ -41,7 +41,8 @@ export async function getWorkspaceById(request, response) {
         message: "Workspace obtenido correctamente",
         status: 200,
         data: {
-            workspace_selected: request.workspace
+            workspace_selected: request.workspace,
+            membership: request.membership
         }
     })
 }
@@ -92,6 +93,27 @@ export async function updateWorkspace(request, response) {
         status: 200,
         data: {
             workspace_updated
+        }
+    })
+}
+
+export async function createWorkspaceMember(request, response){
+    // request.workspace y request.membership vienen del workspaceMiddleware
+    const { rol, email } = request.body
+
+    const membership_created = await workspace_service.createWorkspaceMember({
+        requester_role: request.membership.rol,
+        rol,
+        email,
+        workspace: request.workspace
+    })
+
+    return response.status(201).send({
+        ok: true,
+        status: 201,
+        message: 'Miembro creado correctamente',
+        data: {
+            membership_created
         }
     })
 }

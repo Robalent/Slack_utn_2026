@@ -6,7 +6,7 @@
 function errorHandlerMiddleware(error, request, response, next) {
     // error esperable del sistema 
     if (error.status) {
-        return response.send(
+        return response.status(error.status).send(
             {
                 ok: false,
                 status: error.status,

@@ -9,7 +9,8 @@ import {
     getWorkspaceById,
     deleteWorkspace,
     getWorkspaces,
-    updateWorkspace
+    updateWorkspace,
+    createWorkspaceMember
 } from '../controllers/workspace.controller.js'
 import authMiddleware from '../middlewares/auth.middleware.js'
 import workspaceMiddleware from '../middlewares/workspace.middleware.js'
@@ -58,5 +59,13 @@ workspaceRouter.put(
     updateWorkspace
 )
 // Ejemplo: PUT /api/workspaces/:workspace_id  { name, description } + header Authorization
+
+workspaceRouter.post(
+    '/:workspace_id/members',
+    authMiddleware,
+    workspaceMiddleware(['admin', 'owner']),
+    createWorkspaceMember
+)
+// Ejemplo: POST /api/workspaces/:workspace_id/members  { rol, email } + header Authorization
 
 export default workspaceRouter
